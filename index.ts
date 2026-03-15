@@ -28,9 +28,13 @@ const app = new Elysia()
         const cookieMap = new Map<string, string>();
         const updateCookies = (cookiesArray: string[]) => {
           cookiesArray.forEach((c) => {
-            const [fullStr] = c.split(";");
-            const [key, ...valParts] = fullStr.split("=");
-            if (key) cookieMap.set(key.trim(), valParts.join("="));
+            const fullStr = c.split(";")[0];
+            
+            // fullStr mavjudligini tekshiramiz
+            if (fullStr) {
+              const [key, ...valParts] = fullStr.split("=");
+              if (key) cookieMap.set(key.trim(), valParts.join("="));
+            }
           });
         };
         const getCookieString = () =>
